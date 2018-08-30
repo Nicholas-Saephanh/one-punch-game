@@ -1,0 +1,12 @@
+body{
+	text-align: center;
+}
+.status-box{
+	border: 10px ridge black;
+	height: 100px;
+	width: 300px;
+	margin: 0 auto;
+	font-size: 30px;
+	font-family: impact;
+	color: deepskyblue;
+}
