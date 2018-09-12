@@ -1,24 +1,3 @@
-
-//   Helper Functions
-// ===============================
-//create a random integer between a range and return it. 
-function getRandomArbitrary(min, max) {
-    return Math.round(Math.random() * (max - min) + min);
-}
-//Finds and returns the keycode of any key pressed while body is focused
-var keypressed;
-document.body.onkeyup = function(e){
-	console.log("KEY PRESSED " + e.keyCode);
-	keypressed= e.keyCode;
-    return keypressed;
-}
-
-// //   Game Loop Function using requestAnimationFrame()
-// // ==========================================================
-
-
-
-
 // Event Triggered Game Paper Prototype
 //=============================================
 //Game Load   WINDOW.LOAD STARTGAME();
@@ -43,6 +22,92 @@ document.body.onkeyup = function(e){
 //== If player is same than boss timer, player draws
 //==== Try Again Prompt. Yes == restart round / No == Load Main Menu
 
+
+
+
+//   Helper Functions
+// ===============================
+//create a random integer between a range and return it. 
+function randomIntWithinRange(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+}
+//Finds and returns the keycode of any key pressed while body is focused
+var keypressed;
+document.body.onkeyup = function(e){
+	console.log("KEY PRESSED " + e.keyCode);
+	keypressed = e.keyCode;
+    return keypressed;
+}
+
+// ===============================
+//   Game Load Function
+// ===============================
+//global gameBox variable
+var gameBox = document.getElementById('gameBox');
+
+function loadGame(){
+	console.log('working onload')
+	// load game assets()
+	// run intro() with cancel key
+	// 
+	// create menu and items()
+	// fade append main menu()
+	//
+	//
+	function loadMainMenu(){
+		//Creating the dom elements of main menu
+		var menuGameTitle = document.createElement("h1");
+		var menuNewGame = document.createElement("h2");
+		var menuChooseLevel = document.createElement("h2");
+		var menuDevMode = document.createElement("h2");
+		var menuMore = document.createElement("h2");
+
+		//Give Each Element a matching ID
+		menuGameTitle.id =   'menuGameTitle';
+		menuNewGame.id =     'menuNewGame';
+		menuChooseLevel.id = 'menuChooseLevel';
+		menuDevMode.id =     'menuDevMode';
+		menuMore.id =        'menuMore';
+
+
+		//Creating Text Nodes for Created Dom Elements
+		var menuGameTitle_Text = document.createTextNode('One Punch Man');
+		var menuNewGame_Text = document.createTextNode('New Game');
+		var menuChooseLevel_Text = document.createTextNode('Choose Level');
+		var menuDevMode_Text = document.createTextNode('Dev Mode');
+		var menuMore_Text = document.createTextNode('See My Shit');
+
+		//Putting Text Nodes Into Their Respective Elements
+		menuGameTitle.appendChild(menuGameTitle_Text);
+		menuNewGame.appendChild(menuNewGame_Text);
+		menuChooseLevel.appendChild(menuChooseLevel_Text);
+		menuDevMode.appendChild(menuDevMode_Text);
+		menuMore.appendChild(menuMore_Text);
+
+		//Sending new Dom Elements with Text to parent on DOM
+		gameBox.appendChild(menuGameTitle);
+		gameBox.appendChild(menuNewGame);
+		gameBox.appendChild(menuChooseLevel);
+		gameBox.appendChild(menuDevMode);
+		gameBox.appendChild(menuMore);
+
+		//Give each menu item a click even to navigate game menus
+		menuGameTitle.addEventListener('click', fooB);
+		menuNewGame.addEventListener('click', fooB);
+		menuChooseLevel.addEventListener('click', fooB);
+		menuDevMode.addEventListener('click', fooB);
+		menuMore_Text.addEventListener('click', fooB);
+	}
+	loadMainMenu();
+}
+
+loadGame();
+
+
+
+
+
+// Game Mechanics
 let levels = [
 		{
 			level: 1,
@@ -68,7 +133,7 @@ let levels = [
 		}
 	];
 
-function roundStart(){
+function levelStart(level){
 	let battlePhaseStartTimer,
 		playerReactionTimer,
 		bossTimer;
@@ -94,16 +159,16 @@ function roundStart(){
 
 			// logic to test to see if currentTime needs to trigger win/lose mechanics
 			if (currentTime > bossTimer) {
+				statusBox.innerHTML = "Boss Wins!!";
 				console.log(keypressed)
 				keypressed = null;
-				statusBox.innerHTML = "Boss Wins!!";
 				clearInterval(stateMonitor);
 				return
 			}else if (keypressed == 81) {
 				statusBox.innerHTML = "Player Wins!!";
-				clearInterval(stateMonitor);
 				console.log(keypressed)
 				keypressed = null;
+				clearInterval(stateMonitor);
 				return
 			}
 		}, 10)
@@ -117,7 +182,7 @@ function roundStart(){
 		battlePhaseStartTimer = Date.now();
 		bossTimer = battlePhaseStartTimer + 500;
 		battlePhase();
-	}, getRandomArbitrary(750, 6000))
+	}, randomIntWithinRange(750, 6000))
 }
 
-document.getElementById("play").addEventListener("mouseup", roundStart, false);
+document.getElementById("play").addEventListener("mouseup", levelStart, false);

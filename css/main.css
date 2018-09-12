@@ -1,6 +1,11 @@
 body{
 	text-align: center;
 }
+#gameBox{
+	border: 10px ridge black;
+	min-height: 200px;
+	
+}
 .status-box{
 	border: 10px ridge black;
 	height: 100px;
@@ -10,3 +15,4 @@ body{
 	font-family: impact;
 	color: deepskyblue;
 }
+
