@@ -1,3 +1,5 @@
+"use strict";
+
 // Event Triggered Game Paper Prototype
 //=============================================
 //Game Load   WINDOW.LOAD STARTGAME();
