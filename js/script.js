@@ -93,12 +93,29 @@ function loadGame(){
 		gameBox.appendChild(menuDevMode);
 		gameBox.appendChild(menuMore);
 
+		// Game Navigation. Handles stopping/deleting/routing for game.
+		function gameNavigator(e){
+			switch (e.target.id){
+				case 'menuGameTitle':
+
+				case 'menuNewGame':
+
+				case 'menuChooseLevel':
+
+				case 'menuDevMode':
+
+				case 'menuMore':
+
+			}
+
+		}
+
 		//Give each menu item a click even to navigate game menus
-		menuGameTitle.addEventListener('click', fooB);
-		menuNewGame.addEventListener('click', fooB);
-		menuChooseLevel.addEventListener('click', fooB);
-		menuDevMode.addEventListener('click', fooB);
-		menuMore_Text.addEventListener('click', fooB);
+		menuGameTitle.addEventListener('click', gameNavigator);
+		menuNewGame.addEventListener('click', gameNavigator);
+		menuChooseLevel.addEventListener('click', gameNavigator);
+		menuDevMode.addEventListener('click', gameNavigator);
+		menuMore_Text.addEventListener('click', gameNavigator);
 	}
 	loadMainMenu();
 }
