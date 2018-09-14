@@ -1,4 +1,7 @@
 "use strict";
+//global gameBox variable
+var gameBox = document.getElementById('gameBox');
+
 
 // Event Triggered Game Paper Prototype
 //=============================================
@@ -40,6 +43,86 @@ document.body.onkeyup = function(e){
 	keypressed = e.keyCode;
     return keypressed;
 }
+//Clear Game Box
+function clearGameBox(){
+	gameBox.innerHTML = null;
+}
+// Game Navigation. Handles stopping/deleting/routing for game.
+function gameNavigator(e){
+	// console.log(e.target.id);
+	switch (e.target.id){
+		case 'menuGameTitle':
+			clearGameBox();
+			loadMainMenu();
+			console.log('menuGameTitle Fired');
+			break
+		case 'menuNewGame':
+			levelStart();
+			console.log('menuNewGame Fired');
+			break
+		case 'menuChooseLevel':
+			clearGameBox();
+			console.log('menuChooseLevel Fired');
+			break
+		case 'menuDevMode':
+
+		case 'menuMore':
+
+		case 'contiue':
+
+		default:
+			
+
+	}
+}
+function loadGame(){
+	// load game assets()
+	// run intro() with cancel key
+	// 
+	// create menu and items()
+	// fade append main menu()
+	console.log('working onload')
+	loadMainMenu();
+}
+function loadMainMenu(){
+	//Creating the dom elements of main menu
+	var menuGameTitle = document.createElement("h1");
+	var menuNewGame = document.createElement("h2");
+	var menuChooseLevel = document.createElement("h2");
+	var menuDevMode = document.createElement("h2");
+	var menuMore = document.createElement("h2");
+
+	//Give Each Element a matching ID
+	menuGameTitle.id =   'menuGameTitle';
+	menuNewGame.id =     'menuNewGame';
+	menuChooseLevel.id = 'menuChooseLevel';
+	menuDevMode.id =     'menuDevMode';
+	menuMore.id =        'menuMore';
+
+
+	//Creating Text Nodes for Created Dom Elements
+	var menuGameTitle_Text = document.createTextNode('One Punch Man');
+	var menuNewGame_Text = document.createTextNode('New Game');
+	var menuChooseLevel_Text = document.createTextNode('Choose Level');
+	var menuDevMode_Text = document.createTextNode('Dev Mode');
+	var menuMore_Text = document.createTextNode('See My Shit');
+
+	//Putting Text Nodes Into Their Respective Elements
+	menuGameTitle.appendChild(menuGameTitle_Text);
+	menuNewGame.appendChild(menuNewGame_Text);
+	menuChooseLevel.appendChild(menuChooseLevel_Text);
+	menuDevMode.appendChild(menuDevMode_Text);
+	menuMore.appendChild(menuMore_Text);
+
+	//Sending new Dom Elements with Text to parent on DOM
+	gameBox.appendChild(menuGameTitle);
+	gameBox.appendChild(menuNewGame);
+	gameBox.appendChild(menuChooseLevel);
+	gameBox.appendChild(menuDevMode);
+	gameBox.appendChild(menuMore);
+
+}
+
 // ===============================
 //  [END] Helper Functions
 // ===============================
@@ -48,85 +131,20 @@ document.body.onkeyup = function(e){
 // ===============================
 //   Game Load Function
 // ===============================
-//global gameBox variable
-var gameBox = document.getElementById('gameBox');
-
-function loadGame(){
-	console.log('working onload')
-	// load game assets()
-	// run intro() with cancel key
-	// 
-	// create menu and items()
-	// fade append main menu()
-
-	function loadMainMenu(){
-		//Creating the dom elements of main menu
-		var menuGameTitle = document.createElement("h1");
-		var menuNewGame = document.createElement("h2");
-		var menuChooseLevel = document.createElement("h2");
-		var menuDevMode = document.createElement("h2");
-		var menuMore = document.createElement("h2");
-
-		//Give Each Element a matching ID
-		menuGameTitle.id =   'menuGameTitle';
-		menuNewGame.id =     'menuNewGame';
-		menuChooseLevel.id = 'menuChooseLevel';
-		menuDevMode.id =     'menuDevMode';
-		menuMore.id =        'menuMore';
 
 
-		//Creating Text Nodes for Created Dom Elements
-		var menuGameTitle_Text = document.createTextNode('One Punch Man');
-		var menuNewGame_Text = document.createTextNode('New Game');
-		var menuChooseLevel_Text = document.createTextNode('Choose Level');
-		var menuDevMode_Text = document.createTextNode('Dev Mode');
-		var menuMore_Text = document.createTextNode('See My Shit');
 
-		//Putting Text Nodes Into Their Respective Elements
-		menuGameTitle.appendChild(menuGameTitle_Text);
-		menuNewGame.appendChild(menuNewGame_Text);
-		menuChooseLevel.appendChild(menuChooseLevel_Text);
-		menuDevMode.appendChild(menuDevMode_Text);
-		menuMore.appendChild(menuMore_Text);
-
-		//Sending new Dom Elements with Text to parent on DOM
-		gameBox.appendChild(menuGameTitle);
-		gameBox.appendChild(menuNewGame);
-		gameBox.appendChild(menuChooseLevel);
-		gameBox.appendChild(menuDevMode);
-		gameBox.appendChild(menuMore);
-
-		// Game Navigation. Handles stopping/deleting/routing for game.
-
-	}
-	loadMainMenu();
-}
 
 loadGame();
-
-		function gameNavigator(e){
-			switch (e.target.id){
-				case 'menuGameTitle':
-					loadMainMenu();
-				case 'menuNewGame':
-					levelStart();
-				case 'menuChooseLevel':
-
-				case 'menuDevMode':
-
-				case 'menuMore':
-
-				default:
-			}
-
-		}
+	document.addEventListener('click', gameNavigator);
 
 		//Give each menu item a click even to navigate game menus
-		menuGameTitle.addEventListener('click', gameNavigator);
-		menuNewGame.addEventListener('click', gameNavigator);
-		menuChooseLevel.addEventListener('click', gameNavigator);
-		menuDevMode.addEventListener('click', gameNavigator);
-		menuMore_Text.addEventListener('click', gameNavigator);
+		// document.getElementById('menuGameTitle').
+		// document.getElementById('menuNewGame').addEventListener('click', gameNavigator);
+		// document.getElementById('menuChooseLevel').addEventListener('click', gameNavigator);
+		// document.getElementById('menuDevMode').addEventListener('click', gameNavigator);
+		// document.getElementById('menuMore').addEventListener('click', gameNavigator);
+
 
 
 
