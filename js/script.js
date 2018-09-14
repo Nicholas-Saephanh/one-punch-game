@@ -54,8 +54,7 @@ function loadGame(){
 	// 
 	// create menu and items()
 	// fade append main menu()
-	//
-	//
+
 	function loadMainMenu(){
 		//Creating the dom elements of main menu
 		var menuGameTitle = document.createElement("h1");
@@ -106,6 +105,9 @@ function loadGame(){
 
 				case 'menuMore':
 
+				default:
+				
+
 			}
 
 		}
@@ -126,7 +128,7 @@ loadGame();
 
 
 
-// Game Mechanics
+// Game Mechanics  KEEP SEPARATE UNTIL NAVIGATION LOGIC IS COMPLETE
 let levels = [
 		{
 			level: 1,
@@ -164,7 +166,7 @@ function levelStart(level){
 	statusBox.innerHTML = "Get Ready...";
 	function battlePhase(){
 
-		//reset keypressed to null
+		//reset keypressed to null to enure user can't prefire
 		keypressed = null
 
 		//GAME STATE MONITOR - repeats constantly checking the state of keypressed variable to see if target key is hit
