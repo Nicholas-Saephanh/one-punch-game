@@ -47,17 +47,32 @@ document.body.onkeyup = function(e){
 function clearGameBox(){
 	gameBox.innerHTML = null;
 }
+function loadStage(){
+	var statusBox = document.createElement("div");
+	var playBtn = document.createElement("button");
+	playBtn.id = "play";
+	playBtn.type = "button";
+	playBtn.innerHTML = "button";
+	statusBox.id = "status-box";
+	statusBox.className = "status-box";
+
+	gameBox.appendChild(statusBox);
+	gameBox.appendChild(playBtn);
+
+	document.getElementById("play").addEventListener("mouseup", levelStart, false);
+}
 // Game Navigation. Handles stopping/deleting/routing for game.
 function gameNavigator(e){
 	// console.log(e.target.id);
 	switch (e.target.id){
 		case 'menuGameTitle':
-			clearGameBox();
+			
 			loadMainMenu();
 			console.log('menuGameTitle Fired');
 			break
 		case 'menuNewGame':
-			levelStart();
+			clearGameBox();
+			loadStage();
 			console.log('menuNewGame Fired');
 			break
 		case 'menuChooseLevel':
@@ -132,20 +147,8 @@ function loadMainMenu(){
 //   Game Load Function
 // ===============================
 
-
-
-
 loadGame();
-	document.addEventListener('click', gameNavigator);
-
-		//Give each menu item a click even to navigate game menus
-		// document.getElementById('menuGameTitle').
-		// document.getElementById('menuNewGame').addEventListener('click', gameNavigator);
-		// document.getElementById('menuChooseLevel').addEventListener('click', gameNavigator);
-		// document.getElementById('menuDevMode').addEventListener('click', gameNavigator);
-		// document.getElementById('menuMore').addEventListener('click', gameNavigator);
-
-
+document.addEventListener('click', gameNavigator);
 
 
 // Game Mechanics  KEEP SEPARATE UNTIL NAVIGATION LOGIC IS COMPLETE
@@ -223,4 +226,3 @@ function levelStart(level){
 	}, randomIntWithinRange(750, 6000))
 }
 
-document.getElementById("play").addEventListener("mouseup", levelStart, false);
