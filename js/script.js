@@ -52,12 +52,17 @@ function loadStage(){
 	var playBtn = document.createElement("button");
 	playBtn.id = "play";
 	playBtn.type = "button";
-	playBtn.innerHTML = "button";
+	playBtn.innerHTML = "play";
+	var homeBtn = document.createElement("button");
+	homeBtn.id = "menuGameTitle";
+	homeBtn.type = "button";
+	homeBtn.innerHTML = "home";
 	statusBox.id = "status-box";
 	statusBox.className = "status-box";
 
 	gameBox.appendChild(statusBox);
 	gameBox.appendChild(playBtn);
+	gameBox.appendChild(homeBtn);
 
 	document.getElementById("play").addEventListener("mouseup", levelStart, false);
 }
@@ -66,7 +71,7 @@ function gameNavigator(e){
 	// console.log(e.target.id);
 	switch (e.target.id){
 		case 'menuGameTitle':
-			
+			clearGameBox();
 			loadMainMenu();
 			console.log('menuGameTitle Fired');
 			break
@@ -76,18 +81,21 @@ function gameNavigator(e){
 			console.log('menuNewGame Fired');
 			break
 		case 'menuChooseLevel':
-			clearGameBox();
+			
 			console.log('menuChooseLevel Fired');
 			break
 		case 'menuDevMode':
-
+			console.log('menuDevMode Fired');
+			break
 		case 'menuMore':
-
+			console.log('menuMore Fired');
+			break
 		case 'contiue':
-
+			console.log('contiue Fired');
+			break
 		default:
-			
-
+			console.log('default Fired');
+			break
 	}
 }
 function loadGame(){
@@ -188,6 +196,7 @@ function levelStart(level){
 	statusBox.style.color = "deepskyblue";
 	statusBox.innerHTML = "Get Ready...";
 	function battlePhase(){
+		document.getElementById("play").removeEventListener("mouseup", levelStart);
 		//reset keypressed to null to enure user can't prefire
 		keypressed = null
 		//GAME STATE MONITOR - repeats constantly checking the state of keypressed variable to see if target key is hit
@@ -203,12 +212,14 @@ function levelStart(level){
 				statusBox.innerHTML = "Boss Wins!!";
 				console.log(keypressed)
 				keypressed = null;
+				document.getElementById("play").addEventListener("mouseup", levelStart, false);
 				clearInterval(stateMonitor);
 				return
 			}else if (keypressed == 81) {
 				statusBox.innerHTML = "Player Wins!!";
 				console.log(keypressed)
 				keypressed = null;
+				document.getElementById("play").addEventListener("mouseup", levelStart, false);
 				clearInterval(stateMonitor);
 				return
 			}
