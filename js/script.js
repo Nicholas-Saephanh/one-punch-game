@@ -96,9 +96,9 @@ function loadGame(){
 		function gameNavigator(e){
 			switch (e.target.id){
 				case 'menuGameTitle':
-
+					loadMainMenu();
 				case 'menuNewGame':
-
+					levelStart();
 				case 'menuChooseLevel':
 
 				case 'menuDevMode':
@@ -106,8 +106,6 @@ function loadGame(){
 				case 'menuMore':
 
 				default:
-				
-
 			}
 
 		}
@@ -165,13 +163,10 @@ function levelStart(level){
 	statusBox.style.color = "deepskyblue";
 	statusBox.innerHTML = "Get Ready...";
 	function battlePhase(){
-
 		//reset keypressed to null to enure user can't prefire
 		keypressed = null
-
 		//GAME STATE MONITOR - repeats constantly checking the state of keypressed variable to see if target key is hit
 		let stateMonitor = setInterval(function(){
-
 			//Gets current time every interval to compare to bossTimer
 			let currentTime = Date.now()
 
