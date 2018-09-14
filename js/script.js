@@ -26,7 +26,7 @@
 
 
 
-
+// ===============================
 //   Helper Functions
 // ===============================
 //create a random integer between a range and return it. 
@@ -40,6 +40,10 @@ document.body.onkeyup = function(e){
 	keypressed = e.keyCode;
     return keypressed;
 }
+// ===============================
+//  [END] Helper Functions
+// ===============================
+
 
 // ===============================
 //   Game Load Function
@@ -93,6 +97,13 @@ function loadGame(){
 		gameBox.appendChild(menuMore);
 
 		// Game Navigation. Handles stopping/deleting/routing for game.
+
+	}
+	loadMainMenu();
+}
+
+loadGame();
+
 		function gameNavigator(e){
 			switch (e.target.id){
 				case 'menuGameTitle':
@@ -116,13 +127,6 @@ function loadGame(){
 		menuChooseLevel.addEventListener('click', gameNavigator);
 		menuDevMode.addEventListener('click', gameNavigator);
 		menuMore_Text.addEventListener('click', gameNavigator);
-	}
-	loadMainMenu();
-}
-
-loadGame();
-
-
 
 
 
