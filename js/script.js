@@ -189,6 +189,9 @@ function levelStart(level){
 	let battlePhaseStartTimer,
 		playerReactionTimer,
 		bossTimer;
+	for(let each of document.getElementsByTagName('button')){
+		each.style.display = 'none';
+	}
 
 	const statusBox = document.getElementById("status-box");
 
@@ -196,7 +199,7 @@ function levelStart(level){
 	statusBox.style.color = "deepskyblue";
 	statusBox.innerHTML = "Get Ready...";
 	function battlePhase(){
-		document.getElementById("play").removeEventListener("mouseup", levelStart);
+		
 		//reset keypressed to null to enure user can't prefire
 		keypressed = null
 		//GAME STATE MONITOR - repeats constantly checking the state of keypressed variable to see if target key is hit
@@ -212,16 +215,22 @@ function levelStart(level){
 				statusBox.innerHTML = "Boss Wins!!";
 				console.log(keypressed)
 				keypressed = null;
-				document.getElementById("play").addEventListener("mouseup", levelStart, false);
+				for(let each of document.getElementsByTagName('button')){
+					each.style.display = 'inline-block';
+				}
 				clearInterval(stateMonitor);
 				return
 			}else if (keypressed == 81) {
 				statusBox.innerHTML = "Player Wins!!";
 				console.log(keypressed)
 				keypressed = null;
-				document.getElementById("play").addEventListener("mouseup", levelStart, false);
+				for(let each of document.getElementsByTagName('button')){
+					each.style.display = 'inline-block';
+				}
 				clearInterval(stateMonitor);
 				return
+			}else{
+
 			}
 		}, 10)
 	}
