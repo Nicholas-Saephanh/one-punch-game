@@ -4,7 +4,8 @@ body{
 #gameBox{
 	border: 10px ridge black;
 	min-height: 200px;
-	
+	max-width: 500px;
+	margin: 0 auto;
 }
 .status-box{
 	border: 10px ridge black;
