@@ -1,6 +1,7 @@
 "use strict";
 //global gameBox variable
 var gameBox = document.getElementById('gameBox');
+document.addEventListener('click', gameNavigator);
 
 
 // Event Triggered Game Paper Prototype
@@ -101,7 +102,6 @@ function gameNavigator(e){
 function loadGame(){
 	// load game assets()
 	// run intro() with cancel key
-	// 
 	// create menu and items()
 	// fade append main menu()
 	console.log('working onload')
@@ -156,7 +156,6 @@ function loadMainMenu(){
 // ===============================
 
 loadGame();
-document.addEventListener('click', gameNavigator);
 
 
 // Game Mechanics  KEEP SEPARATE UNTIL NAVIGATION LOGIC IS COMPLETE
@@ -192,7 +191,6 @@ function levelStart(level){
 	for(let each of document.getElementsByTagName('button')){
 		each.style.display = 'none';
 	}
-
 	const statusBox = document.getElementById("status-box");
 
 	//When round starts tell the player to get ready to react in neutral color
