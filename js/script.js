@@ -185,9 +185,12 @@ let levels = [
 	];
 
 function levelStart(level){
+	//Variables until i figure out asset management and level params
 	let battlePhaseStartTimer,
 		playerReactionTimer,
-		bossTimer;
+		bossTimer,
+		playerImg,
+		bossImg;
 	for(let each of document.getElementsByTagName('button')){
 		each.style.display = 'none';
 	}
