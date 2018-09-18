@@ -26,6 +26,29 @@ let levels = [
 				},
 				bossTimer:500
 			}
+		},
+		{
+			level: 2,
+			bgmusic:"",
+			bgsetting:"",
+			winvideo:"",
+			losevideo:"",
+			player:{
+				images:{
+					versusimage:"",
+					winsprite:"",
+					losesprite:"",
+				}
+			},
+			boss:{
+				name: "Genos",
+				images:{
+					versusimage:"",
+					winsprite:"",
+					losesprite:"",
+				},
+				bossTimer:500
+			}
 		}
 	];
 
@@ -197,5 +220,5 @@ function loadStage(){
 }
 
 
-// Runs main menu on load.
+// Runs main menu on load as a starting point until intros and size recommendations are added.
 loadMainMenu();
