@@ -82,6 +82,7 @@ function gameNavigator(e){
 		case 'menuNewGame':
 			clearGameBox();
 			loadStage();
+			levelStart(levels[0]);
 			console.log('menuNewGame Fired');
 			break
 		case 'menuChooseLevel':
@@ -193,7 +194,8 @@ function levelStart(level){
 		statusBox.innerHTML = "FIGHT!!!";
 		//Creates a vari
 		battlePhaseStartTimer = Date.now();
-		bossTimer = battlePhaseStartTimer + 500;
+			//TEMPORARY TIMER UNTIL LEVELS ARE SORTED
+		bossTimer = battlePhaseStartTimer + level.boss.bossTimer;
 		battlePhase();
 	}, randomIntWithinRange(750, 6000))
 }
@@ -216,7 +218,7 @@ function loadStage(){
 	gameBox.appendChild(playBtn);
 	gameBox.appendChild(homeBtn);
 
-	document.getElementById("play").addEventListener("mouseup", levelStart, false);
+	// document.getElementById("play").addEventListener("mouseup", levelStart, false);
 }
 
 
