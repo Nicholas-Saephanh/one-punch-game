@@ -3,35 +3,34 @@
 var gameBox = document.getElementById('gameBox');
 document.addEventListener('click', gameNavigator);
 
-
-// Event Triggered Game Paper Prototype
-//=============================================
-//Game Load   WINDOW.LOAD STARTGAME();
-
-//When Game is loaded play OPM Intro
-
-//When Intro is Over, Load Menu [Start Game Button, Choose Level Button, More/Education Mode]
-
-//Start Game Active = Load level based on object
-
-//Versus intro showing close ups to exacerbate duel mood
-
-//after Versus Intro, start round
-
-//= Round chooses a random time between 1-6 seconds to trigger FIGHT
-
-//= Player must press designated key as soon as FIGHT Triggers
-//== If player is faster than boss timer, player wins
-//==== Continue to next round on player ready
-//== If player is slower than boss timer, player loses
-//==== Try Again Prompt. Yes == restart round / No == Load Main Menu
-//== If player is same than boss timer, player draws
-//==== Try Again Prompt. Yes == restart round / No == Load Main Menu
-
-
+let levels = [
+		{
+			level: 1,
+			bgmusic:"",
+			bgsetting:"",
+			winvideo:"",
+			losevideo:"",
+			player:{
+				images:{
+					versusimage:"",
+					winsprite:"",
+					losesprite:"",
+				}
+			},
+			boss:{
+				name: "Sea King",
+				images:{
+					versusimage:"",
+					winsprite:"",
+					losesprite:"",
+				},
+				bossTimer:500
+			}
+		}
+	];
 
 // ===============================
-//   Helper Functions
+//   Utility Functions
 // ===============================
 //create a random integer between a range and return it. 
 function randomIntWithinRange(min, max) {
@@ -48,25 +47,6 @@ document.body.onkeyup = function(e){
 function clearGameBox(){
 	gameBox.innerHTML = null;
 }
-function loadStage(){
-	var statusBox = document.createElement("div");
-	var playBtn = document.createElement("button");
-	playBtn.id = "play";
-	playBtn.type = "button";
-	playBtn.innerHTML = "play";
-	var homeBtn = document.createElement("button");
-	homeBtn.id = "menuGameTitle";
-	homeBtn.type = "button";
-	homeBtn.innerHTML = "home";
-	statusBox.id = "status-box";
-	statusBox.className = "status-box";
-
-	gameBox.appendChild(statusBox);
-	gameBox.appendChild(playBtn);
-	gameBox.appendChild(homeBtn);
-
-	document.getElementById("play").addEventListener("mouseup", levelStart, false);
-}
 // Game Navigation. Handles stopping/deleting/routing for game.
 function gameNavigator(e){
 	// console.log(e.target.id);
@@ -82,7 +62,6 @@ function gameNavigator(e){
 			console.log('menuNewGame Fired');
 			break
 		case 'menuChooseLevel':
-			
 			console.log('menuChooseLevel Fired');
 			break
 		case 'menuDevMode':
@@ -99,14 +78,7 @@ function gameNavigator(e){
 			break
 	}
 }
-function loadGame(){
-	// load game assets()
-	// run intro() with cancel key
-	// create menu and items()
-	// fade append main menu()
-	console.log('working onload')
-	loadMainMenu();
-}
+//recreates main menu 
 function loadMainMenu(){
 	//Creating the dom elements of main menu
 	var menuGameTitle = document.createElement("h1");
@@ -143,46 +115,7 @@ function loadMainMenu(){
 	gameBox.appendChild(menuChooseLevel);
 	gameBox.appendChild(menuDevMode);
 	gameBox.appendChild(menuMore);
-
 }
-
-// ===============================
-//  [END] Helper Functions
-// ===============================
-
-
-// ===============================
-//   Game Load Function
-// ===============================
-
-loadGame();
-
-
-// Game Mechanics  KEEP SEPARATE UNTIL NAVIGATION LOGIC IS COMPLETE
-let levels = [
-		{
-			level: 1,
-			bgmusic:"",
-			bgsetting:"",
-			winvideo:"",
-			losevideo:"",
-			player:{
-				versusimage:"",
-				sprites:{
-					winsprite:"",
-					losesprite:"",
-				}
-			},
-			boss:{
-				versusimage:"",
-				sprites:{
-					winsprite:"",
-					losesprite:"",
-				},
-				bossTimer:1000
-			}
-		}
-	];
 
 function levelStart(level){
 	//Variables until i figure out asset management and level params
@@ -200,22 +133,18 @@ function levelStart(level){
 	statusBox.style.color = "deepskyblue";
 	statusBox.innerHTML = "Get Ready...";
 	function battlePhase(){
-		
-		//reset keypressed to null to enure user can't prefire
+		//reset keypressed to null to ensure user can't prefire
 		keypressed = null
 		//GAME STATE MONITOR - repeats constantly checking the state of keypressed variable to see if target key is hit
 		let stateMonitor = setInterval(function(){
 			//Gets current time every interval to compare to bossTimer
 			let currentTime = Date.now()
-
 			//Double check to see that events can fire in between recursion
 			console.log("check state")
-
 			// logic to test to see if currentTime needs to trigger win/lose mechanics
 			if (currentTime > bossTimer) {
 				statusBox.innerHTML = "Boss Wins!!";
 				console.log(keypressed)
-				keypressed = null;
 				for(let each of document.getElementsByTagName('button')){
 					each.style.display = 'inline-block';
 				}
@@ -224,7 +153,6 @@ function levelStart(level){
 			}else if (keypressed == 81) {
 				statusBox.innerHTML = "Player Wins!!";
 				console.log(keypressed)
-				keypressed = null;
 				for(let each of document.getElementsByTagName('button')){
 					each.style.display = 'inline-block';
 				}
@@ -247,3 +175,27 @@ function levelStart(level){
 	}, randomIntWithinRange(750, 6000))
 }
 
+// TEST FUNCTION THAT CREATES A DEV UI TO RUN ROUNDS EASIER
+function loadStage(){
+	var statusBox = document.createElement("div");
+	var playBtn = document.createElement("button");
+	playBtn.id = "play";
+	playBtn.type = "button";
+	playBtn.innerHTML = "play";
+	var homeBtn = document.createElement("button");
+	homeBtn.id = "menuGameTitle";
+	homeBtn.type = "button";
+	homeBtn.innerHTML = "home";
+	statusBox.id = "status-box";
+	statusBox.className = "status-box";
+
+	gameBox.appendChild(statusBox);
+	gameBox.appendChild(playBtn);
+	gameBox.appendChild(homeBtn);
+
+	document.getElementById("play").addEventListener("mouseup", levelStart, false);
+}
+
+
+// Runs main menu on load.
+loadMainMenu();
